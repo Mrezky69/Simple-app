@@ -1,0 +1,47 @@
+<div class="form-container">
+<h2>{{ isEditMode ? 'Edit Item' : 'Tambah Item' }}</h2>
+<form (ngSubmit)="onSubmit()" #itemForm="ngForm">
+    <div class="form-group">
+        <label for="itemName">Nama Item</label>
+        <input id="itemName" [(ngModel)]="item.itemsName" name="itemName" required #itemName="ngModel">
+        <div *ngIf="itemName.invalid && (itemName.dirty || itemName.touched)" class="error">
+            Nama Item harus diisi.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="itemCode">Kode Item</label>
+        <input id="itemCode" [(ngModel)]="item.itemsCode" name="itemCode" required #itemCode="ngModel" readonly>
+        <div *ngIf="itemCode.invalid && (itemCode.dirty || itemCode.touched)" class="error">
+            Kode Item harus diisi.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="itemStock">Stok</label>
+        <input id="itemStock" [(ngModel)]="item.stock" name="itemStock" required #itemStock="ngModel">
+        <div *ngIf="itemStock.invalid && (itemStock.dirty || itemStock.touched)" class="error">
+            Stok harus diisi.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="itemPrice">Harga</label>
+        <input id="itemPrice" [(ngModel)]="item.price" name="itemPrice" required #itemPrice="ngModel">
+        <div *ngIf="itemPrice.invalid && (itemPrice.dirty || itemPrice.touched)" class="error">
+            Harga harus diisi.
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="itemAvailable">Status</label>
+        <select id="isAvailable" [(ngModel)]="item.isAvailable" name="isAvailable" required #isAvailable="ngModel">
+                <option [ngValue]="1">Aktif</option>
+                <option [ngValue]="0">Tidak Aktif</option>
+        </select>
+            <div *ngIf="isAvailable.invalid && (isAvailable.dirty || isAvailable.touched)" class="error">
+                Status harus diisi.
+            </div>
+    </div>
+    <div class="form-actions">
+        <button type="button" (click)="onCancel()">Batal</button>
+        <button type="submit" [disabled]="itemForm.invalid">{{ isEditMode ? 'Perbarui' : 'Buat' }}</button>
+    </div>
+</form>
+</div>

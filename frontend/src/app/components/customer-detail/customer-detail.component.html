@@ -1,0 +1,17 @@
+<div *ngIf="customer" class="detail-container">
+    <div class="detail-header">
+        <img [src]="'data:image/png;base64,' + customer.pic" alt="{{ customer.name }}" *ngIf="customer.pic">
+        <div class="detail-info">
+            <h1>{{ customer.name }}</h1>
+            <p><strong>Kode:</strong> {{ customer.code }}</p>
+            <p><strong>Alamat:</strong> {{ customer.address }}</p>
+            <p><strong>Telepon:</strong> {{ customer.phone }}</p>
+            <p><strong>Status:</strong> {{ customer.isActive ? 'Aktif' : 'Tidak Aktif' }}</p>
+            <p><strong>Last Order:</strong> {{ customer.lastOrder | date }}</p>
+            <button mat-button routerLink="/customers">Kembali</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="!customer">
+    <p>Loading customer details...</p>
+</div>

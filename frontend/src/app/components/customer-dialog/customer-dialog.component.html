@@ -1,0 +1,51 @@
+<div class="form-container">
+    <h2>{{ isEditMode ? 'Edit Data Customer' : 'Tambah Data Customer' }}</h2>
+    <form (ngSubmit)="onSubmit()" #customerForm="ngForm">
+        <div class="form-group">
+            <label for="code">Kode Customer</label>
+            <input id="code" [(ngModel)]="customer.code" name="code" required #code="ngModel" readonly>
+            <div *ngIf="code.invalid && (code.dirty || code.touched)" class="error">
+                Kode Customer harus diisi.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Nama Customer</label>
+            <input id="name" [(ngModel)]="customer.name" name="name" required #name="ngModel">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
+                Nama Customer harus diisi.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address">Alamat</label>
+            <input id="address" [(ngModel)]="customer.address" name="address" required #address="ngModel">
+            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="error">
+                Alamat harus diisi.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone">No. Telepon</label>
+            <input id="phone" [(ngModel)]="customer.phone" name="phone" required pattern="^\d{10,13}$" #phone="ngModel">
+            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error">
+                No. Telepon harus diisi dan berupa angka dengan panjang 10-13 karakter.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="isActive">Status</label>
+            <select id="isActive" [(ngModel)]="customer.isActive" name="isActive" required #isActive="ngModel">
+                <option [ngValue]="1">Aktif</option>
+                <option [ngValue]="0">Tidak Aktif</option>
+            </select>
+            <div *ngIf="isActive.invalid && (isActive.dirty || isActive.touched)" class="error">
+                Status harus diisi.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pic">Gambar</label>
+            <input type="file" id="pic" (change)="onFileSelected($event)" #picInput>
+        </div>
+        <div class="form-actions">
+            <button type="button" (click)="onCancel()">Batal</button>
+            <button type="submit" [disabled]="customerForm.invalid">{{ isEditMode ? 'Update' : 'Buat' }}</button>
+        </div>
+    </form>
+</div>

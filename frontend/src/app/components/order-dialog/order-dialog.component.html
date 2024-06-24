@@ -1,0 +1,41 @@
+<div class="form-container">
+    <h2>{{ isEditMode ? 'Edit Order' : 'Tambah Order' }}</h2>
+    <form (ngSubmit)="onSubmit()" #orderForm="ngForm">
+        <div class="form-group">
+            <label for="orderCode">Kode Order</label>
+            <input id="orderCode" [(ngModel)]="order.orderCode" name="orderCode" required #orderCode="ngModel" readonly>
+            <div *ngIf="orderCode.invalid && (orderCode.dirty || orderCode.touched)" class="error">
+                Kode Order harus diisi.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="customerId">Customer</label>
+            <select id="customerId" [(ngModel)]="order.customerId" name="customerId" required #customerId="ngModel">
+                <option *ngFor="let customer of activeCustomers" [value]="customer.id">{{ customer.name }}</option>
+            </select>
+            <div *ngIf="customerId.invalid && (customerId.dirty || customerId.touched)" class="error">
+                Customer harus diisi.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="itemId">Item</label>
+            <select id="itemId" [(ngModel)]="order.itemId" name="itemId" required #itemId="ngModel">
+                <option *ngFor="let item of availableItems" [value]="item.id">{{ item.itemsName }}</option>
+            </select>
+            <div *ngIf="itemId.invalid && (itemId.dirty || itemId.touched)" class="error">
+                Item harus diisi.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="quantity">Kuantitas</label>
+            <input id="quantity" type="number" [(ngModel)]="order.quantity" name="quantity" required #quantity="ngModel">
+            <div *ngIf="errorMessage" class="error">
+                {{ errorMessage }}
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="button" (click)="onCancel()">Batal</button>
+            <button type="submit" [disabled]="orderForm.invalid">{{ isEditMode ? 'Update' : 'Buat' }}</button>
+        </div>
+    </form>
+</div>

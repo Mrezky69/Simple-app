@@ -1,0 +1,46 @@
+<div class="container">
+    <h4>Item List</h4>
+    <div class="toolbar">
+        <button mat-raised-button color="primary" [routerLink]="['/item/add']">Add Item</button>
+
+        <mat-form-field appearance="outline" class="search-bar">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search Items">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <table mat-table [dataSource]="items" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Item Code </th>
+            <td mat-cell *matCellDef="let item"> {{item.itemsCode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="itemsName">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let item"> {{item.itemsName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="itemslast">
+            <th mat-header-cell *matHeaderCellDef> Last Restock </th>
+            <td mat-cell *matCellDef="let item"> {{ item.lastReStock | date }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let item">
+                <button mat-button [routerLink]="['/items/detail', item.id]">Detail</button>
+                <button mat-button [routerLink]="['/item/edit', item.id]">Edit</button>
+                <button mat-button (click)="deleteItem(item.id)">Delete</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['id', 'itemsName', 'itemslast', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['id', 'itemsName', 'itemslast', 'actions'];"></tr>
+    </table>
+
+    <div class="paginator-container">
+        <mat-paginator [length]="totalItems" [pageSize]="10" [pageSizeOptions]="[10, 20, 30]"
+            (page)="pageEvent($event)"></mat-paginator>
+    </div>
+</div>

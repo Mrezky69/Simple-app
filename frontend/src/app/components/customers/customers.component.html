@@ -1,0 +1,46 @@
+<div class="container">
+    <h4>Customer List</h4>
+    <div class="toolbar">
+        <button mat-raised-button color="primary" [routerLink]="['/customer/add']">Add Customer</button>
+
+        <mat-form-field appearance="outline" class="search-bar">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search Customers">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <table mat-table [dataSource]="customers" class="mat-elevation-z8">
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef> Customer Code </th>
+            <td mat-cell *matCellDef="let customer"> {{customer.code}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let customer"> {{customer.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef> Status </th>
+            <td mat-cell *matCellDef="let customer"> {{customer.isActive ? "Aktif" : "Tidak Aktif"}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef class="action"> Actions </th>
+            <td mat-cell *matCellDef="let customer">
+                <button mat-button [routerLink]="['/customers/detail', customer.id]">Detail</button>
+                <button mat-button [routerLink]="['/customer/edit', customer.id]">Edit</button>
+                <button mat-button (click)="deleteCustomer(customer.id)">Delete</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['code', 'name', 'status', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['code', 'name', 'status', 'actions'];"></tr>
+    </table>
+
+    <div class="paginator-container">
+        <mat-paginator [length]="totalCustomers" [pageSize]="10" [pageSizeOptions]="[10, 20, 30]"
+            (page)="pageEvent($event)"></mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+.container {
+    margin: 20px;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+}
+
+h4 {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    margin-bottom: 10px;
+}
+
+.paginator-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.mat-paginator-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.mat-paginator-range-label {
+    order: -1;
+}

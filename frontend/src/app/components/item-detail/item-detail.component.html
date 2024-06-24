@@ -1,0 +1,16 @@
+<div *ngIf="item" class="detail-container">
+    <div class="detail-header">
+        <div class="detail-info">
+            <h1>{{ item.itemsName }}</h1>
+            <p><strong>Kode:</strong> {{ item.itemsCode }}</p>
+            <p><strong>Stok:</strong> {{ item.stock }}</p>
+            <p><strong>Harga:</strong> {{ item.price | currency:'IDR':'symbol':'1.0-0' }}</p>
+            <p><strong>Ketersediaan:</strong> {{ item.isAvailable ? 'Tersedia' : 'Tidak Tersedia' }}</p>
+            <p><strong>Restok Terakhir:</strong> {{ item.lastReStock | date }}</p>
+            <button mat-button routerLink="/items">Kembali</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="!item">
+    <p>Loading item details...</p>
+</div>

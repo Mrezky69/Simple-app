@@ -1,0 +1,16 @@
+<div *ngIf="order" class="detail-container">
+    <div class="detail-header">
+        <div class="detail-info">
+            <h1>{{ order.orderCode }}</h1>
+            <p><strong>Tanggal:</strong> {{ order.orderDate | date }}</p>
+            <p><strong>Pelanggan:</strong> {{ order.customer.name }}</p>
+            <p><strong>Item:</strong> {{ order.item.itemsName }}</p>
+            <p><strong>Kuantitas:</strong> {{ order.quantity }}</p>
+            <p><strong>Total Harga:</strong> {{ order.totalPrice | currency:'IDR':'symbol':'1.0-0' }}</p>
+            <button mat-button routerLink="/orders">Kembali</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="!order">
+    <p>Loading order details...</p>
+</div>
